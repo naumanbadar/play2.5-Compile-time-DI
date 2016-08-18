@@ -1,0 +1,18 @@
+version: '2'
+services:
+  tester:
+    image: activator-runner
+    volumes:
+      - .:/project
+      - sbt:/root/.sbt
+      - ivy2:/root/.ivy2
+    ports:
+      - 9000:9000
+    command: activator ~compile
+volumes:
+  sbt:
+    external: true
+      #name: sbt
+  ivy2:
+    external: true
+      # name: ivy2
