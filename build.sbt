@@ -1,4 +1,4 @@
-name := """kae2"""
+name := """play_compiletime_di"""
 
 version := "1.0-SNAPSHOT"
 
