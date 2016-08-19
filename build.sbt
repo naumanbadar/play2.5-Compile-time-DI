@@ -23,7 +23,7 @@ scalacOptions ++= Seq("-feature")
 //D - show all durations
 //F - show full stack traces
 //I - show reminder of failed and canceled tests without stack traces
-testOptions in Test += Tests.Argument("-oIDF")
+testOptions in Test += Tests.Argument("-oDFI")
 
 
 
@@ -38,7 +38,7 @@ javaOptions in Universal ++= Seq(
 
 dockerBaseImage := "<your base image>"
 
-maintainer in Docker := "Nauman Badar <nauman.badar@ntsweden.se>"
+maintainer in Docker := "Nauman Badar <naumanb@kth.se>"
 
 daemonUser in Docker := "root"
 
