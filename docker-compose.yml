@@ -2,6 +2,8 @@ version: '2'
 services:
   tester:
     image: activator-runner
+    #or
+    #build: test/resources/docker
     volumes:
       - .:/project
       - sbt:/root/.sbt
