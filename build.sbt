@@ -38,10 +38,11 @@ javaOptions in Universal ++= Seq(
 
 dockerBaseImage := "<your base image>"
 
-maintainer in Docker := "Nauman Badar <naumanb@kth.se>"
+maintainer in Docker := "your name <your email>"
 
 daemonUser in Docker := "root"
 
-dockerExposedPorts := Seq(9000)
+//uncomment only if you need root previledges. Needed if using some external tools which need sudo access inside container.
+//dockerExposedPorts := Seq(9000)
 
-packageName in Docker := "kae"
+packageName in Docker := "<it will be your image name>"
