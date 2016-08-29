@@ -1,4 +1,6 @@
-name := """play_compiletime_di"""
+name := """<descriptive name of your project>"""
+
+organization := "<your company name>"
 
 version := "1.0-SNAPSHOT"
 
