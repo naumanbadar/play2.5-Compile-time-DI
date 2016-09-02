@@ -15,7 +15,7 @@ libraryDependencies ++= Seq(
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
   "net.sourceforge.jtds" % "jtds" % "1.3.1",
   "com.typesafe.play" %% "anorm" % "2.5.0",
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.4.0"
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
