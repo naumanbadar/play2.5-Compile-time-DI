@@ -1,9 +1,7 @@
 version: '2'
 services:
   tester:
-    image: activator-runner
-    #or
-    #build: test/resources/docker
+    build: test/resources/docker
     volumes:
       - .:/project
       - sbt:/root/.sbt
@@ -14,7 +12,5 @@ services:
 volumes:
   sbt:
     external: true
-      #name: sbt
   ivy2:
     external: true
-      # name: ivy2
