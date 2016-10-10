@@ -50,9 +50,14 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
   //provide all controller objects and asset object to Routes, can check its constructor in auto-generated router in target folder
   lazy val router = new Routes(httpErrorHandler, homeController, assets)
 
-//  val system: ActorSystem = ActorSystem("ParseActorSystem")
-//  val master = system.actorOf(Props(classOf[MasterActor],ProductionParseSystem),"MasterActor")
-//  master ! MasterActor.StartProcessing
+
+  //for starting your Actor system
+
+  /*
+    val system: ActorSystem = ActorSystem("ParseActorSystem")
+    val master = system.actorOf(Props(classOf[MasterActor],ProductionParseSystem),"MasterActor")
+    master ! MasterActor.StartProcessing
+  */
 
 
 }
