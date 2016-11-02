@@ -1,28 +1,17 @@
 import akka.actor.{ActorSystem, Props}
+import dao.BaseDAO
 import play.api.ApplicationLoader.Context
+import play.api.db.Database
 import play.api.{Application, ApplicationLoader, BuiltInComponentsFromContext, LoggerConfigurator}
+import serviceActors.MyActor
+
+import scala.concurrent.Future
+
 import router.Routes
 
-// Copyright (C) 2011-2012 the original author or authors.
-// See the LICENCE.txt file distributed with this work for additional
-// information regarding copyright ownership.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 /**
-  * Created by Nauman Badar on 2016-04-28.
+  * Created by nb on 16/11/02.
   */
-
 
 /*
 ApplicationLoader as copied from play docs to enable compile DI. After extending trait 'ApplicationLoader'
@@ -39,8 +28,33 @@ class MyApplicationLoader extends ApplicationLoader {
 }
 
 class MyComponents(context: Context) extends BuiltInComponentsFromContext(context) {
-  //    override def router: Router = Router.empty
 
+  //instantiate resources which need to be cleaned up on application exits e.g. akka, database, ws client etc.
+
+
+  //Database
+  //~~~~~~~~
+
+  val database: Database = BaseDAO.instantiateNewDatabase
+
+  //now you can pass database to DAO
+
+  // register stop hook
+  applicationLifecycle.addStopHook(() => Future.successful(database.shutdown()))
+
+
+  //Akka
+  //~~~~
+
+  val system: ActorSystem = ActorSystem("RenameMe")
+  val master = system.actorOf(Props(classOf[MyActor]), "RenameThisActor")
+
+  // register stop hook
+  applicationLifecycle.addStopHook(() => Future.successful(system.terminate()))
+
+
+  //Controllers
+  //~~~~~~~~~~~
 
   lazy val assets = new controllers.Assets(httpErrorHandler)
 
@@ -49,15 +63,6 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
 
   //provide all controller objects and asset object to Routes, can check its constructor in auto-generated router in target folder
   lazy val router = new Routes(httpErrorHandler, homeController, assets)
-
-
-  //for starting your Actor system
-
-  /*
-    val system: ActorSystem = ActorSystem("ParseActorSystem")
-    val master = system.actorOf(Props(classOf[MasterActor],ProductionParseSystem),"MasterActor")
-    master ! MasterActor.StartProcessing
-  */
 
 
 }
