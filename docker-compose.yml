@@ -8,7 +8,12 @@ services:
       - ivy2:/root/.ivy2
     ports:
       - 9000:9000
-    command: activator ~compile
+    command: activator ~run
+    environment:
+      - DATABASE_SERVER=<fill in>
+      - DATABASE_NAME=<fill in>
+      - DATABASE_LOGIN=<fill in>
+      - DATABASE_PASSWORD=<fill in>
 volumes:
   sbt:
     external: true
