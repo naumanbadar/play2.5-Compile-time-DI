@@ -18,7 +18,7 @@ class BaseDAOTest extends FlatSpec with Matchers with BeforeAndAfterAll {
   override protected def beforeAll(): Unit = {
     dao.database.withConnection {
       implicit con =>
-        SQL(Source.fromFile(getClass.getResource("/sql/testDbEvolution.sql").getPath).mkString).execute()
+        SQL(Source.fromFile(getClass.getResource("/sql/bootstrapTestDb.sql").getPath).mkString).execute()
 
     }
   }

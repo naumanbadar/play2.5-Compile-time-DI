@@ -1,6 +1,0 @@
-CREATE DATABASE MyDatabase;
-
-CREATE TABLE MyDatabase.dbo.MyTable (
-  id   INT PRIMARY KEY NOT NULL IDENTITY,
-  name VARCHAR(200)
-);

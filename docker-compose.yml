@@ -11,7 +11,7 @@ services:
     command: activator ~run
     environment:
       - DATABASE_SERVER=<fill in>
-      - DATABASE_NAME=<fill in>
+      - DATABASE_NAME=MyTestDatabase
       - DATABASE_LOGIN=<fill in>
       - DATABASE_PASSWORD=<fill in>
 volumes:

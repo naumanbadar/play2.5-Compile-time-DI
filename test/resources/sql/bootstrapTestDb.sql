@@ -1,0 +1,6 @@
+CREATE DATABASE MyTestDatabase;
+
+CREATE TABLE MyTestDatabase.dbo.MyTable (
+  id   INT PRIMARY KEY NOT NULL IDENTITY,
+  name VARCHAR(200)
+);
