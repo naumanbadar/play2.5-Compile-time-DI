@@ -2,7 +2,7 @@ import akka.actor.{ActorSystem, Props}
 import dao.BaseDAO
 import org.asynchttpclient.AsyncHttpClientConfig
 import play.api.ApplicationLoader.Context
-import play.api.db.Database
+import play.api.db.{Database, Databases}
 import play.api.libs.ws.WSConfigParser
 import play.api.libs.ws.ahc.{AhcConfigBuilder, AhcWSClient, AhcWSClientConfig}
 import play.api.{Application, ApplicationLoader, BuiltInComponentsFromContext, LoggerConfigurator}
@@ -36,12 +36,27 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
   //Database
   //~~~~~~~~
 
-  val database: Database = BaseDAO.instantiateNewDatabase
+  private def instantiateNewDatabase: Database = {
+    lazy val dbServer = sys.env("DATABASE_SERVER")
+    lazy val dbName = sys.env("DATABASE_NAME")
+    lazy val dbLogin = sys.env("DATABASE_LOGIN")
+    lazy val dbPassword = sys.env("DATABASE_PASSWORD")
 
-  //now you can pass database to DAO
+    val database = Databases(
+      driver = "net.sourceforge.jtds.jdbc.Driver",
+      url = s"jdbc:jtds:sqlserver://$dbServer/$dbName",
+      name = s"$dbServer/$dbName",
+      config = Map(
+        "username" -> dbLogin,
+        "password" -> dbPassword,
+        "hikaricp.connectionTestQuery" -> "SELECT 'TRUE'"
+      )
+    )
+    // register stop hook
+    applicationLifecycle.addStopHook(() => Future.successful(database.shutdown()))
 
-  // register stop hook
-  applicationLifecycle.addStopHook(() => Future.successful(database.shutdown()))
+    database
+  }
 
 
   //Akka
