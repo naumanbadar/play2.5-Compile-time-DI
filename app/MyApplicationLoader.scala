@@ -1,14 +1,15 @@
 import akka.actor.{ActorSystem, Props}
 import dao.BaseDAO
+import org.asynchttpclient.AsyncHttpClientConfig
 import play.api.ApplicationLoader.Context
 import play.api.db.Database
+import play.api.libs.ws.WSConfigParser
+import play.api.libs.ws.ahc.{AhcConfigBuilder, AhcWSClient, AhcWSClientConfig}
 import play.api.{Application, ApplicationLoader, BuiltInComponentsFromContext, LoggerConfigurator}
+import router.Routes
 import serviceActors.MyActor
 
 import scala.concurrent.Future
-
-import router.Routes
-
 /**
   * Created by nb on 16/11/02.
   */
@@ -52,6 +53,28 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
   // register stop hook
   applicationLifecycle.addStopHook(() => Future.successful(system.terminate()))
 
+
+  //WS
+  //~~
+
+  /** Initialisation of WS Client has been taken from plays documentation
+    * at https://www.playframework.com/documentation/2.5.x/ScalaWS#Directly-creating-WSClient
+    * */
+  val parser = new WSConfigParser(configuration, environment)
+  val config = new AhcWSClientConfig(wsClientConfig = parser.parse())
+  val builder = new AhcConfigBuilder(config)
+  val logging = new AsyncHttpClientConfig.AdditionalChannelInitializer() {
+    override def initChannel(channel: io.netty.channel.Channel): Unit = {
+      channel.pipeline.addFirst("log", new io.netty.handler.logging.LoggingHandler("debug"))
+    }
+  }
+  val ahcBuilder = builder.configure()
+  ahcBuilder.setHttpAdditionalChannelInitializer(logging)
+  val ahcConfig = ahcBuilder.build()
+  val wsClient = new AhcWSClient(ahcConfig)
+
+  // register stop hook
+  applicationLifecycle.addStopHook(() => Future.successful(wsClient.close()))
 
   //Controllers
   //~~~~~~~~~~~
