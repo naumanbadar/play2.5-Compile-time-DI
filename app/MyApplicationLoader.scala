@@ -1,5 +1,4 @@
 import akka.actor.{ActorSystem, Props}
-import dao.BaseDAO
 import org.asynchttpclient.AsyncHttpClientConfig
 import play.api.ApplicationLoader.Context
 import play.api.db.{Database, Databases}
@@ -10,6 +9,7 @@ import router.Routes
 import serviceActors.MyActor
 
 import scala.concurrent.Future
+
 /**
   * Created by nb on 16/11/02.
   */
@@ -36,6 +36,7 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
   //Database
   //~~~~~~~~
 
+  // call this function to instantiate database and pass it to your constructor. stop hook is taken care of.
   private def instantiateNewDatabase: Database = {
     lazy val dbServer = sys.env("DATABASE_SERVER")
     lazy val dbName = sys.env("DATABASE_NAME")
