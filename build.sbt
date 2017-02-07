@@ -1,4 +1,4 @@
-name := """<descriptive name of your project>"""
+name := """Play 2.5 startup template with compile time DI"""
 
 organization := "<your company name>"
 
@@ -13,7 +13,7 @@ libraryDependencies ++= Seq(
   cache,
   ws,
   "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
-  "net.sourceforge.jtds" % "jtds" % "1.3.1",
+  "com.microsoft.sqlserver" % "mssql-jdbc" % "6.1.0.jre8",
   "com.typesafe.play" %% "anorm" % "2.5.0",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.4.0"
 )
@@ -50,4 +50,4 @@ maintainer in Docker := "Nauman Badar"
 
 dockerExposedPorts := Seq(9000)
 
-packageName in Docker := "play-startup-template"
+packageName in Docker := normalizedName.value

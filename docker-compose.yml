@@ -14,6 +14,19 @@ services:
       - DATABASE_NAME=MyTestDatabase
       - DATABASE_LOGIN=<fill in>
       - DATABASE_PASSWORD=<fill in>
+    depends_on:
+#    this will allow to access database host by hostname db_service which is accessible from within docker-compose
+      - "db_service"
+
+  db_service:
+    image: microsoft/mssql-server-linux
+    environment:
+      - SA_PASSWORD=Sdf3r_gs
+      - ACCEPT_EULA=Y
+#    expose port only if you want to connect to sqlserver from outside docker
+    ports:
+      - 1433:1433
+
 volumes:
   sbt:
     external: true

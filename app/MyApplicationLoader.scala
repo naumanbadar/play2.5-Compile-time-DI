@@ -43,9 +43,9 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
     lazy val dbLogin = sys.env("DATABASE_LOGIN")
     lazy val dbPassword = sys.env("DATABASE_PASSWORD")
 
-    val database = Databases(
-      driver = "net.sourceforge.jtds.jdbc.Driver",
-      url = s"jdbc:jtds:sqlserver://$dbServer/$dbName",
+    lazy val database: Database = Databases(
+      driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+      url = s"jdbc:sqlserver://$dbServer;databaseName=$dbName",
       name = s"$dbServer/$dbName",
       config = Map(
         "username" -> dbLogin,
