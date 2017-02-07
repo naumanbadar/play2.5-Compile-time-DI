@@ -30,3 +30,7 @@ Note that it will not bind container ports to host port as per design of docker-
     cd <your project name>
     docker-compose run --service-ports tester bash
     
+
+# Docker base image for testing
+
+Dockerfile for `naumanbadar/sbt_docker`, referred in docker-compose.yml, can be found at <https://github.com/naumanbadar/sbt_docker> or the image itself can be pulled from <https://hub.docker.com/r/naumanbadar/sbt_docker/~/dockerfile/> 
