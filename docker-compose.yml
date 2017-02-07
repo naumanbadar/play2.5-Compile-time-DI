@@ -1,7 +1,7 @@
 version: '2'
 services:
   tester:
-    iamge: naumanbadar/sbt_docker
+    image: naumanbadar/sbt_docker
     volumes:
       - .:/project
       - sbt:/root/.sbt
