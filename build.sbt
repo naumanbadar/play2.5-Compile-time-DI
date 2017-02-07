@@ -41,13 +41,13 @@ javaOptions in Universal ++= Seq(
   "-Dpidfile.path=/dev/null"
 )
 
-dockerBaseImage := "<your base image>"
+dockerBaseImage := "openjdk:8-jre"
 
-maintainer in Docker := "your name <your email>"
+maintainer in Docker := "Nauman Badar"
 
 //uncomment only if you need root previledges. Needed if using some external tools which need sudo access inside container.
 //daemonUser in Docker := "root"
 
 dockerExposedPorts := Seq(9000)
 
-packageName in Docker := "<it will be your image name>"
+packageName in Docker := "play-startup-template"
