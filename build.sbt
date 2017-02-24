@@ -13,7 +13,9 @@ val buildSettings = List(
   //D - show all durations
   //F - show full stack traces
   //I - show reminder of failed and canceled tests without stack traces
-  testOptions in Test += Tests.Argument("-oDFI")
+  testOptions in Test += Tests.Argument("-oDFI"),
+  parallelExecution in Test := false,
+  fork in Test := true
 )
 
 lazy val root = (project in file("."))
@@ -22,6 +24,15 @@ lazy val root = (project in file("."))
   .aggregate(core, web)
 
 lazy val core = (project in file("core"))
+  //Integration Tests
+  //~~~~~~~~~~~~~~~~~
+  //has to have IntegrationTest scope
+  .configs(IntegrationTest)
+  .settings(Defaults.itSettings: _*)
+  .settings(
+    fork in IntegrationTest := true,
+    testOptions in IntegrationTest += Tests.Argument("-oDFI")
+  )
 
 lazy val web = (project in file("web"))
   .enablePlugins(PlayScala)
