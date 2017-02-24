@@ -10,5 +10,6 @@ object Dependencies {
   val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1"
   val scalaTestPlay = "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1"
   val msSqlServer = "com.microsoft.sqlserver" % "mssql-jdbc" % "6.1.0.jre8"
+  val playJson =  "com.typesafe.play" %% "play-json" % "2.5.12"
 
 }

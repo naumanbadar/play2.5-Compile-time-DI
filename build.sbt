@@ -33,10 +33,25 @@ lazy val core = (project in file("core"))
     fork in IntegrationTest := true,
     testOptions in IntegrationTest += Tests.Argument("-oDFI")
   )
+  //dependencies for core
+  .settings(
+  libraryDependencies ++= Seq(
+    playAnorm,
+    typesafeConfig,
+    msSqlServer,
+    playJson,
+    jdbc,
+    ws,
+    scalaLogging,
+    logback,
+    scalaTest
+  ))
 
 lazy val web = (project in file("web"))
   .enablePlugins(PlayScala)
   .dependsOn(core)
+  .settings(dockerSettings)
+  //depdendies for web
   .settings(
     libraryDependencies ++= Seq(
       jdbc,
