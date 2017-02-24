@@ -1,6 +1,10 @@
-name := """Play 2.5 startup template with compile time DI"""
+import Dependencies._
 
-organization := "<your company name>"
+name := """Play 2.5 startup template with compile time Dependency Injection"""
+
+organization := "com.somecompany"
+
+organizationName := "Some Company"
 
 version := "1.0-SNAPSHOT"
 
@@ -12,10 +16,10 @@ libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
-  "com.microsoft.sqlserver" % "mssql-jdbc" % "6.1.0.jre8",
-  "com.typesafe.play" %% "anorm" % "2.5.0",
-  "com.typesafe.scala-logging" %% "scala-logging" % "3.4.0"
+  scalaTestPlay % Test,
+  msSqlServer,
+  scalaLogging,
+  playAnorm
 )
 
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
