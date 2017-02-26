@@ -8,12 +8,12 @@ services:
       - ivy2:/root/.ivy2
     ports:
       - 9000:9000
-    command: sbt ~run
+    command: sbt ~web/run
     environment:
-      - DATABASE_SERVER=<fill in>
-      - DATABASE_NAME=MyTestDatabase
-      - DATABASE_LOGIN=<fill in>
-      - DATABASE_PASSWORD=<fill in>
+      - DATABASE_SERVER=db_service
+      - DATABASE_NAME=MyDatabase
+      - DATABASE_LOGIN=sa
+      - DATABASE_PASSWORD=Sdf3r_gs
 #    this will allow to access database host by hostname db_service which is accessible from within docker-compose
     depends_on:
       - db_service
