@@ -83,3 +83,16 @@ lazy val dockerSettings = Seq(
 
 //resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
+
+// db resurrect with a tast from sbt
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+lazy val resurrectDb = taskKey[Unit]("Resurrect database from schema file")
+
+val filter: ScopeFilter =
+  ScopeFilter(
+    inProjects(core),
+    inConfigurations(IntegrationTest),
+    inTasks(compile)
+  )
+
+resurrectDb := runMain.toTask(" db.DbBootstrapper").all(filter).value

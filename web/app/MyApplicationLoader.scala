@@ -1,4 +1,5 @@
 import akka.actor.{ActorSystem, Props}
+import com.typesafe.config.ConfigFactory
 import org.asynchttpclient.AsyncHttpClientConfig
 import play.api.ApplicationLoader.Context
 import play.api.db.{Database, Databases}
@@ -38,12 +39,15 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
 
   // call this function to instantiate database and pass it to your constructor. stop hook is taken care of.
   private def instantiateNewDatabase: Database = {
-    lazy val dbServer = sys.env("DATABASE_SERVER")
-    lazy val dbName = sys.env("DATABASE_NAME")
-    lazy val dbLogin = sys.env("DATABASE_LOGIN")
-    lazy val dbPassword = sys.env("DATABASE_PASSWORD")
 
-    lazy val database: Database = Databases(
+    lazy val appConfig = ConfigFactory.load().getConfig("database")
+    lazy val dbServer: String = appConfig.getString("server")
+    lazy val dbName: String = appConfig.getString("dbname")
+    lazy val dbLogin: String = appConfig.getString("login")
+    lazy val dbPassword: String = appConfig.getString("password")
+
+
+    lazy val database = Databases(
       driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver",
       url = s"jdbc:sqlserver://$dbServer;databaseName=$dbName",
       name = s"$dbServer/$dbName",
@@ -53,6 +57,7 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
         "hikaricp.connectionTestQuery" -> "SELECT 'TRUE'"
       )
     )
+
     // register stop hook
     applicationLifecycle.addStopHook(() => Future.successful(database.shutdown()))
 
