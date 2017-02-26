@@ -13,9 +13,9 @@ Also worth noting that docker-compose needs 2 named external volumes to enable q
 
     git clone https://github.com/naumanbadar/play2.5-Compile-time-DI.git <your project name>
     
-# How to start activator
+# How to run in dev mode in docker-compose:
 
-#### Start in auto compile mode which will recompile on every change in sources.
+#### Run in auto compile mode which will recompile on every change in sources.
 
     cd <your project name>
     docker-compose up
