@@ -86,6 +86,7 @@ lazy val dockerSettings = Seq(
 
 // db resurrect with a tast from sbt
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// run it from root project
 lazy val resurrectDb = taskKey[Unit]("Resurrect database from schema file")
 
 val filter: ScopeFilter =
