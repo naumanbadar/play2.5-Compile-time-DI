@@ -21,6 +21,8 @@ val buildSettings = List(
 lazy val root = (project in file("."))
   //fallback common settings
   .settings(inThisBuild(projectIdentitySettings ++ buildSettings))
+  // set `web` as default project for running sbt tasks without specifying the project scope.
+  .settings(onLoad in Global := (onLoad in Global).value andThen (Command.process("project web", _)))
   .aggregate(core, web)
 
 lazy val core = (project in file("core"))
