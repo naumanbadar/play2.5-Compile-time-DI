@@ -20,7 +20,7 @@ trait DAO extends LazyLogging {
   def now(): String = dateToString(LocalDateTime.now())
 
   // for formatting of datetime to string
-  def dateToString(dateTime: LocalDateTime): String = dateTime.format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))
+  def dateToString(dateTime: LocalDateTime): String = dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 
   //for parsing date time from string
   def parseDateTime(str: String): LocalDateTime = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
