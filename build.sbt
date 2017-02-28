@@ -1,7 +1,8 @@
 import Dependencies._
 
+name := """Play 2.5 startup template with compile time Dependency Injection"""
+
 val projectIdentitySettings = List(
-  name := """Play 2.5 startup template with compile time Dependency Injection""",
   organization := "com.somecompany",
   organizationName := "Some Company",
   version := "1.0-SNAPSHOT"

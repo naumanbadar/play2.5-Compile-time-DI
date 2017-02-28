@@ -2,8 +2,8 @@ package db
 
 import com.typesafe.config.ConfigFactory
 import models.Model
-import play.api.db.{Database, Databases}
 import org.scalatest.{BeforeAndAfterAll, FlatSpec, Matchers}
+import play.api.db.{Database, Databases}
 
 /**
   * Created by Nauman Badar on Wed, Jan 25, 2017.
@@ -38,11 +38,8 @@ class DAOTest extends FlatSpec with Matchers with BeforeAndAfterAll {
     DbBootstrapper.resurrectDb()
   }
 
-  /*.withConnection {
-    implicit con =>
-  }*/
-
   behavior of "DAO"
+
   it should "persist model and get back an id" in {
     noException should be thrownBy dao.insertModel(Model("Hello Model"))
   }
