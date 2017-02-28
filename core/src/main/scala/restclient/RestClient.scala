@@ -3,9 +3,9 @@ package restclient
 import com.typesafe.scalalogging.LazyLogging
 import play.api.libs.ws.{WSAuthScheme, WSClient, WSResponse}
 
+import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
-import scala.concurrent.duration._
 
 /**
   * Created by Nauman Badar on 2017-02-28

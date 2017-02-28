@@ -1,9 +1,6 @@
 package restclient
 
-import akka.actor.ActorSystem
-import akka.stream.ActorMaterializer
-import org.scalatest.{AsyncFlatSpec, BeforeAndAfterAll, FlatSpec, Matchers}
-import play.api.libs.ws.ahc.AhcWSClient
+import org.scalatest.{AsyncFlatSpec, BeforeAndAfterAll, Matchers}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
