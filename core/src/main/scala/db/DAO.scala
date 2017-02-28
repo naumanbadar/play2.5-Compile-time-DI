@@ -23,7 +23,7 @@ trait DAO extends LazyLogging {
   def dateToString(dateTime: LocalDateTime): String = dateTime.format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))
 
   //for parsing date time from string
-  def parseDateTime(str: String): LocalDateTime = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))
+  def parseDateTime(str: String): LocalDateTime = LocalDateTime.parse(str, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))
 
   def insertModel(model: Model): Int = {
     database.withConnection {
