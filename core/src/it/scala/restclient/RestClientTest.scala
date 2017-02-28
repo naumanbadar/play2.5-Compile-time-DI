@@ -1,19 +1,19 @@
 package restclient
 
-import org.scalatest.{AsyncFlatSpec, BeforeAndAfterAll, Matchers}
+import org.scalatest.{FlatSpec, Matchers}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by Nauman Badar on 2017-02-28
   */
-class RestClientTest extends AsyncFlatSpec with Matchers with BeforeAndAfterAll {
+class RestClientTest extends FlatSpec with Matchers {
 
   behavior of "RestClient"
 
-  it should "send GET request" in {
+  it should "send GET request" in new WsCLoaner {
 
-    WsCLoaner.loan {
+    loan {
       wsc =>
         val rc = RestClient(
           wsc,

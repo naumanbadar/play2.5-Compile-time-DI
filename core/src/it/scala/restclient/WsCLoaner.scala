@@ -10,7 +10,7 @@ import scala.concurrent.{ExecutionContext, Future}
 /**
   * Created by Nauman Badar on 2017-02-28
   */
-object WsCLoaner {
+trait WsCLoaner {
 
   private implicit val system = ActorSystem()
   private implicit val materializer = ActorMaterializer()
