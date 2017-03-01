@@ -38,6 +38,10 @@ class DAOTest extends FlatSpec with Matchers with BeforeAndAfterAll {
     DbBootstrapper.resurrectDb()
   }
 
+  //shutdown
+  override protected def afterAll(): Unit = db.shutdown()
+
+
   behavior of "DAO"
 
   it should "persist model and get back an id" in {
