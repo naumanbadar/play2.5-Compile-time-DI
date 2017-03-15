@@ -72,7 +72,8 @@ lazy val web = (project in file("web"))
 lazy val dockerSettings = Seq(
   // No PID file as it creates problem when restarting docker container
   javaOptions in Universal += "-Dpidfile.path=/dev/null",
-  dockerBaseImage := "openjdk:8-jre",
+  // for getting correct timezone inside container using image naumanbadar/open-jre_docker
+  dockerBaseImage := "naumanbadar/open-jre_docker",
   maintainer in Docker := "Nauman Badar <naumanb@kth.se>",
   //uncomment only if you need root previledges. Needed if using some external tools which need sudo access inside container.
   //daemonUser in Docker := "root"
